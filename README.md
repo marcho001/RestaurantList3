@@ -2,9 +2,7 @@
 
 一個簡單的餐廳蒐集清單app，可以將喜歡的餐廳資訊放入清單中
 
-![image alt](./1.png)
-![image alt](./2.png)
-![image alt](./3.png)
+![image alt](./4.png)
 
 ## 安裝
 
