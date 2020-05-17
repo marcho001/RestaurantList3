@@ -5,7 +5,16 @@ const Restaurants = require('../../models/addRestaurant')
 router.get('/', (req, res) => {
   Restaurants.find()
     .lean()
-    .then(list => res.render('index', { list }))
+    .then((list) => {
+
+      list.forEach((i) => {
+        if(Number(i.rating) > 4.5 ){
+          i.popular = true
+        }
+      })
+
+      res.render('index', { list, popular : list.popular })
+    })
     .catch(error => console.log(error))
 })
 router.get('/create', (req, res) => {

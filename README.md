@@ -33,6 +33,7 @@ npm run dev
 - 可以新增一間自己喜歡的餐廳
 - 可以刪除不要的餐廳
 - 可以編輯一間餐廳資訊
+- 首頁評分超過4.5 貼上強烈推薦標籤
 
 ## 工具
 - Node.js
@@ -43,3 +44,4 @@ npm run dev
 - body-parser
 - Mongodb
 - Mongoose
+- method-override
