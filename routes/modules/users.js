@@ -36,7 +36,10 @@ router.post('/register', (req, res) => {
       password,
       confirmPassword
     })
+    //檢查有沒註冊 有救回原畫面
+
   }
 })
 
+// 登出router & add logout button
 module.exports = router
