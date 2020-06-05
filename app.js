@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
-app.use(bodyParser.urlencoded({ extend: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(routes)
 
 app.listen(port, () => {
