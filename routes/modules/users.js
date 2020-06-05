@@ -35,10 +35,24 @@ router.post('/register', (req, res) => {
       email,
       password,
       confirmPassword
-    })
-    //檢查有沒註冊 有救回原畫面
-
+    }) 
   }
+  //檢查有沒註冊 有救回原畫面
+  User.findOne({ email })
+    .then(user => {
+      if(user){
+        console.log('User is exists')
+        res.render('register')
+      } else {
+        User.create({
+          name,
+          email,
+          password
+        })
+      }
+    })
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
 })
 
 // 登出router & add logout button
