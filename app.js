@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const routes = require('./routes/index')
 //引入session
 const session = require('express-session')
+//引入passport
+const UsePassport = require('./config/passport')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 
@@ -29,6 +31,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+UsePassport(app)
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }))

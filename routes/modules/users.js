@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/User')
 const bodyParser = require('body-parser')
-
+//引入passport套件
+const passport = require('passport')
 
 router.use(bodyParser.urlencoded({ extended: true }))
 
@@ -14,8 +15,13 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
-router.post('/login', (req, res) => {
-  res.send('login')
+//直接將passport 內建函示當中間函數
+router.post('/login', passport.authenticate('local', {
+  //成功登入 導去首頁
+  successRedirect: '/',
+  //失敗登入 回去longin頁
+  failureRedirect: 'users/login'
+})
 })
 
 router.post('/register', (req, res) => {
