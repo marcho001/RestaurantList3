@@ -31,7 +31,19 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+//使用引入的passport
 UsePassport(app)
+app.use((req, res, next) => {
+  
+  //將passport 的登入資訊存到locals 裡面 之後在其他地方都可以使用此狀態
+  //存isAuthenticated 是否登入的不林值
+  res.locals.isAuthenticated = req.isAuthenticated()
+  //存登入者資訊
+  res.locals.user = req.user
+  next()
+  //之後可以在handlebars使用這兩個變數
+})
+
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }))
