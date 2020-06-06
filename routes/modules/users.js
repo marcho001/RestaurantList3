@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const Restaurant = require('../../models/addRestaurant')
 const User = require('../../models/User')
 const bodyParser = require('body-parser')
 
@@ -20,7 +19,7 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  const { name, email, password, confirmPassword} = req.body
+  const { name, email, password, confirmPassword } = req.body
   const errors = []
   if (!email || !password || !confirmPassword){
     errors.push({ message: '請輸入信箱及密碼！' })
@@ -41,18 +40,25 @@ router.post('/register', (req, res) => {
   User.findOne({ email })
     .then(user => {
       if(user){
+        errors.push({message: '這個email 已經註冊囉'})
         console.log('User is exists')
-        res.render('register')
+        res.render('register', {
+          errors,
+          name,
+          email,
+          password,
+          confirmPassword
+        })
       } else {
-        User.create({
+        return User.create({
           name,
           email,
           password
         })
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
       }
     })
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
 })
 
 // 登出router & add logout button

@@ -3,7 +3,7 @@ const port = 3000
 const app = express()
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
-const routes = require('./routes')
+const routes = require('./routes/index')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 
