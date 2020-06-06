@@ -21,8 +21,7 @@ router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   //失敗登入 回去longin頁
   failureRedirect: 'users/login'
-})
-})
+}))
 
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body

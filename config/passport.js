@@ -1,3 +1,4 @@
+//passport設定在這邊 設定好後去app 引入 然後去router使用功能驗證
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/User')
