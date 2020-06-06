@@ -20,7 +20,7 @@ router.post('/login', passport.authenticate('local', {
   //成功登入 導去首頁
   successRedirect: '/',
   //失敗登入 回去longin頁
-  failureRedirect: 'users/login'
+  failureRedirect: '/users/login'
 }))
 
 router.post('/register', (req, res) => {
@@ -67,4 +67,8 @@ router.post('/register', (req, res) => {
 })
 
 // 登出router & add logout button
+router.get('/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/users/login')
+})
 module.exports = router
