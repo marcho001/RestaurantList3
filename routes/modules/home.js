@@ -3,26 +3,27 @@ const router = express.Router()
 const Restaurants = require('../../models/addRestaurant')
 
 router.get('/', (req, res) => {
-  Restaurants.find()
+  const userId = req.user._id
+  Restaurants.find({ userId })
     .lean()
     .then((list) => {
-
       list.forEach((i) => {
         if(Number(i.rating) > 4.5 ){
           i.popular = true
         }
       })
-
       res.render('index', { list, popular : list.popular })
     })
     .catch(error => console.log(error))
 })
+
 router.get('/create', (req, res) => {
   return res.render('create')
 })
 router.get('/search', (req, res) => {
   const query = req.query.keywords.toLowerCase()
-  return Restaurants.find()
+  const userId = req.user._id
+  return Restaurants.find({ userId })
     .lean()
     .then((lists) => {
       const list = []
