@@ -31,9 +31,9 @@ module.exports = app => {
   // 引用 Facebook 登入策略
     // ...
     passport.use(new FacebookStrategy({
-      clientID: '2045619235582377',
-      clientSecret: '6f0a92091e545b53d3fde8d448df2287',
-      callbackURL: 'http://localhost:3000/auth/facebook/callback',
+      clientID: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+      callbackURL: process.env.FACEBOOK_CALLBACK,
       profileFields: ['email', 'displayName']
     }, (accessToken, refreshToken, profile, done) => {
       const { name, email } = profile._json

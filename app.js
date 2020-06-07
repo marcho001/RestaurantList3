@@ -11,8 +11,11 @@ const UsePassport = require('./config/passport')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
-mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
 
 db.on('error', () => {
@@ -28,7 +31,7 @@ app.set('view engine', 'handlebars')
 
 //設定session secret resave saveunintialized
 app.use(session({
-  secret: 'getOffMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
