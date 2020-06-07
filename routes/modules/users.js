@@ -4,6 +4,7 @@ const User = require('../../models/User')
 const bodyParser = require('body-parser')
 //引入passport套件
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 router.use(bodyParser.urlencoded({ extended: true }))
 
@@ -54,11 +55,14 @@ router.post('/register', (req, res) => {
           confirmPassword
         })
       } 
-      return User.create({
+      return bcrypt
+        .genSalt(10) //產生10顆鹽
+        .then(salt => bcrypt.hash(password, salt))// 產生雜湊值
+        .then(hash => User.create({
         name,
         email,
-        password
-      })
+        password: hash //用雜湊值取代密碼
+      }))
       .then(() => res.redirect('/'))
       .catch(err => console.log(err))
       
