@@ -10,6 +10,7 @@ const session = require('express-session')
 const UsePassport = require('./config/passport')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
+const flash = require('connect-flash')
 
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
@@ -33,6 +34,7 @@ app.use(session({
 }))
 //使用引入的passport
 UsePassport(app)
+app.use(flash())
 app.use((req, res, next) => {
   
   //將passport 的登入資訊存到locals 裡面 之後在其他地方都可以使用此狀態
@@ -42,6 +44,8 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   next()
   //之後可以在handlebars使用這兩個變數
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
 })
 
 app.use(express.static('public'))

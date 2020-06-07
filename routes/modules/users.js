@@ -46,29 +46,29 @@ router.post('/register', (req, res) => {
     .then(user => {
       if(user){
         errors.push({message: '這個email 已經註冊囉'})
-        console.log('User is exists')
-        res.render('register', {
+        return res.render('register', {
           errors,
           name,
           email,
           password,
           confirmPassword
         })
-      } else {
-        return User.create({
-          name,
-          email,
-          password
-        })
-        .then(() => res.redirect('/'))
-        .catch(err => console.log(err))
-      }
+      } 
+      return User.create({
+        name,
+        email,
+        password
+      })
+      .then(() => res.redirect('/'))
+      .catch(err => console.log(err))
+      
     })
 })
 
 // 登出router & add logout button
 router.get('/logout', (req, res) => {
-  req.logOut()
+  req.logout()
+  req.flash('success_msg', '你已經成功登出')
   res.redirect('/users/login')
 })
 module.exports = router
