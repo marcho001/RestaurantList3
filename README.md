@@ -25,7 +25,9 @@ npm run dev
 
 ## 功能
 
-- 瀏覽收集的餐廳
+- 創建帳號
+- 使用facebook第三方登入
+- 瀏覽使用者收集的餐廳
 - 可以搜尋餐廳的中文名字、評分、分類
 - 可以點進餐廳看更多介紹
 - 可以新增一間自己喜歡的餐廳
@@ -43,3 +45,10 @@ npm run dev
 - Mongodb
 - Mongoose
 - method-override
+- Express-session
+- passport.js
+- passport-facebook
+- passport-local
+- dotenv
+- connect-flash
+- bcryptjs

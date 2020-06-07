@@ -2,7 +2,6 @@ const express = require('express')
 const port = 3000
 const app = express()
 const exphbs = require('express-handlebars')
-const mongoose = require('mongoose')
 const routes = require('./routes/index')
 //引入session
 const session = require('express-session')
@@ -15,16 +14,8 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
-const db = mongoose.connection
+require('./config/mongoose')
 
-db.on('error', () => {
-  console.log('error')
-})
-
-db.once('open', () => {
-  console.log('mongodb connect!')
-})
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
